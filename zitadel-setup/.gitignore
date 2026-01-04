@@ -1,0 +1,44 @@
+# Environment files (contain secrets)
+.env
+.env.local
+.env.*.local
+
+# Node modules
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+.vike/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Docker
+*.pem
+
+# Cloudflare
+.wrangler/
+.dev.vars
+
+# Test coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp

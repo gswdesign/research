@@ -1,0 +1,103 @@
+# =============================================================================
+# ZITADEL Configuration
+# =============================================================================
+# This file contains additional ZITADEL configuration
+# Environment variables take precedence over this file
+# =============================================================================
+
+Log:
+  Level: info
+  Formatter:
+    Format: text
+
+# Machine Identification (for multi-instance deployments)
+Machine:
+  Identification:
+    Hostname:
+      Enabled: true
+    Webhook:
+      Enabled: false
+
+# Telemetry (disable in production if not wanted)
+Telemetry:
+  Enabled: false
+
+# Default Instance Settings
+DefaultInstance:
+  # Login Policy
+  LoginPolicy:
+    AllowUsernamePassword: true
+    AllowExternalIdp: true
+    AllowRegister: true
+    ForceMFA: false
+    PasswordlessType: 1 # 0=Not allowed, 1=Allowed, 2=Forced
+    HidePasswordReset: false
+    IgnoreUnknownUsernames: false
+    DefaultRedirectURI: ""
+    PasswordCheckLifetime: 240h # 10 days
+    ExternalLoginCheckLifetime: 240h
+    MFAInitSkipLifetime: 720h # 30 days
+    SecondFactorCheckLifetime: 18h
+    MultiFactorCheckLifetime: 12h
+
+  # Password Complexity Policy
+  PasswordComplexityPolicy:
+    MinLength: 8
+    HasUppercase: true
+    HasLowercase: true
+    HasNumber: true
+    HasSymbol: false
+
+  # Lockout Policy
+  LockoutPolicy:
+    MaxPasswordAttempts: 10
+    MaxOTPAttempts: 10
+    ShouldShowLockoutFailure: true
+
+  # Privacy Policy
+  PrivacyPolicy:
+    TOSLink: ""
+    PrivacyLink: ""
+    HelpLink: ""
+    SupportEmail: ""
+
+  # Label Policy (Branding) - Configure via Console for better UX
+  LabelPolicy:
+    PrimaryColor: "#5469D4"
+    BackgroundColor: "#FFFFFF"
+    WarnColor: "#CD3D56"
+    FontColor: "#000000"
+    PrimaryColorDark: "#5469D4"
+    BackgroundColorDark: "#111827"
+    WarnColorDark: "#CD3D56"
+    FontColorDark: "#FFFFFF"
+    HideLoginNameSuffix: false
+    DisableWatermark: true
+
+  # Domain Policy
+  DomainPolicy:
+    UserLoginMustBeDomain: false
+    ValidateOrgDomains: true
+    SMTPSenderAddressMatchesInstanceDomain: false
+
+  # Features
+  Features:
+    LoginDefaultOrg: false
+    TriggerIntrospectionProjections: false
+    LegacyIntrospection: false
+    UserSchema: true
+    TokenExchange: true
+    Actions: true
+    ImprovedPerformance: []
+
+# Session settings
+SystemDefaults:
+  SecretGenerators:
+    MachineKeySize: 2048
+    ApplicationKeySize: 2048
+
+# Quotas (for multi-tenant usage tracking)
+Quotas:
+  Access:
+    ExhaustedCookieKey: "zitadel.quota.exhausted"
+    ExhaustedCookieMaxAge: 300 # seconds

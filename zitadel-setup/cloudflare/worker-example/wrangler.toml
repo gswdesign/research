@@ -1,0 +1,10 @@
+name = "zitadel-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+ZITADEL_ISSUER = "https://your-zitadel-domain"
+ZITADEL_AUDIENCE = "your-project-id"
+
+# These will be set via `wrangler secret put`
+# ZITADEL_JWKS_CACHE_KEY = "zitadel:jwks"

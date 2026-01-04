@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:17-alpine
+    container_name: zitadel-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-zitadel}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD required}
+      POSTGRES_DB: ${POSTGRES_DB:-zitadel}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-zitadel} -d ${POSTGRES_DB:-zitadel}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - zitadel-network
+
+  # ZITADEL Identity Server
+  zitadel:
+    image: ghcr.io/zitadel/zitadel:v3.3.0
+    container_name: zitadel
+    restart: unless-stopped
+    command: start-from-init --masterkeyFromEnv --tlsMode external
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Database
+      ZITADEL_DATABASE_POSTGRES_HOST: postgres
+      ZITADEL_DATABASE_POSTGRES_PORT: 5432
+      ZITADEL_DATABASE_POSTGRES_DATABASE: ${POSTGRES_DB:-zitadel}
+      ZITADEL_DATABASE_POSTGRES_USER_USERNAME: ${POSTGRES_USER:-zitadel}
+      ZITADEL_DATABASE_POSTGRES_USER_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD required}
+      ZITADEL_DATABASE_POSTGRES_USER_SSL_MODE: disable
+      ZITADEL_DATABASE_POSTGRES_ADMIN_USERNAME: ${POSTGRES_USER:-zitadel}
+      ZITADEL_DATABASE_POSTGRES_ADMIN_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD required}
+      ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE: disable
+
+      # External Access (Railway will set these via env vars)
+      ZITADEL_EXTERNALDOMAIN: ${ZITADEL_EXTERNALDOMAIN:-localhost}
+      ZITADEL_EXTERNALSECURE: ${ZITADEL_EXTERNALSECURE:-false}
+      ZITADEL_EXTERNALPORT: ${ZITADEL_EXTERNALPORT:-8080}
+
+      # Master Key (32 bytes, generate with: openssl rand -base64 32)
+      ZITADEL_MASTERKEY: ${ZITADEL_MASTERKEY:?ZITADEL_MASTERKEY required}
+
+      # First Instance Setup
+      ZITADEL_FIRSTINSTANCE_ORG_NAME: ${ZITADEL_ORG_NAME:-Default}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME: ${ZITADEL_ADMIN_USERNAME:-admin@zitadel.localhost}
+      ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD: ${ZITADEL_ADMIN_PASSWORD:-Password1!}
+
+      # Logging
+      ZITADEL_LOG_LEVEL: ${ZITADEL_LOG_LEVEL:-info}
+
+      # Default Settings
+      ZITADEL_DEFAULTINSTANCE_LOGINPOLICY_ALLOWUSERNAMEPASSWORD: "true"
+      ZITADEL_DEFAULTINSTANCE_LOGINPOLICY_ALLOWEXTERNALIDP: "true"
+      ZITADEL_DEFAULTINSTANCE_LOGINPOLICY_ALLOWREGISTER: "true"
+      ZITADEL_DEFAULTINSTANCE_LOGINPOLICY_FORCEMFA: "false"
+
+    ports:
+      - "${ZITADEL_PORT:-8080}:8080"
+    volumes:
+      - ./config/zitadel-config.yaml:/zitadel-config.yaml:ro
+    healthcheck:
+      test: ["CMD", "/app/zitadel", "ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - zitadel-network
+
+  # Custom Login UI (React + Vike) - for local development
+  login-ui:
+    build:
+      context: ./login-ui
+      dockerfile: Dockerfile
+    container_name: zitadel-login-ui
+    restart: unless-stopped
+    depends_on:
+      zitadel:
+        condition: service_healthy
+    environment:
+      VITE_ZITADEL_AUTHORITY: ${ZITADEL_AUTHORITY:-http://localhost:8080}
+      VITE_ZITADEL_CLIENT_ID: ${ZITADEL_CLIENT_ID:-}
+      VITE_REDIRECT_URI: ${REDIRECT_URI:-http://localhost:3000/callback}
+    ports:
+      - "${LOGIN_UI_PORT:-3000}:3000"
+    networks:
+      - zitadel-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  zitadel-network:
+    driver: bridge
