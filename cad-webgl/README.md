@@ -18,6 +18,7 @@ A system that:
 | [competitor-analysis-laiout.md](./competitor-analysis-laiout.md) | Deep dive on Laiout.co - tech stack, approach, reverse engineering |
 | [technical-architecture.md](./technical-architecture.md) | System architecture, component design, data flow |
 | [floor-plan-algorithms.md](./floor-plan-algorithms.md) | Academic research on generative floor plan algorithms |
+| [cad-to-3d-pipeline.md](./cad-to-3d-pipeline.md) | **CAD → 3D model conversion** - wall extrusion, CSG, AI rendering |
 
 ## Competitor Summary
 
