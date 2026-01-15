@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  zitadel:
+    image: 'ghcr.io/zitadel/zitadel:latest'
+    container_name: zitadel-local
+    command: start-from-init --masterkeyFromEnv --tlsMode disabled
+    environment:
+      - ZITADEL_MASTERKEY=MasterkeyNeedsToHave32Characters
+      - ZITADEL_DATABASE_POSTGRES_HOST=db
+      - ZITADEL_DATABASE_POSTGRES_PORT=5432
+      - ZITADEL_DATABASE_POSTGRES_DATABASE=zitadel
+      - ZITADEL_DATABASE_POSTGRES_USER=zitadel
+      - ZITADEL_DATABASE_POSTGRES_PASSWORD=zitadel
+      - ZITADEL_DATABASE_POSTGRES_SSL_MODE=disable
+      - ZITADEL_DATABASE_POSTGRES_ADMIN_SSL_MODE=disable
+      - ZITADEL_EXTERNALSECURE=false
+      - ZITADEL_EXTERNALDOMAIN=localhost
+      - ZITADEL_EXTERNALPORT=8080
+      # Disable MFA requirements for testing
+      - ZITADEL_DEFAULTINSTANCE_LOGINPOLICY_FORCEMFA=false
+      - ZITADEL_DEFAULTINSTANCE_LOGINPOLICY_FORCEMFALOCALONLY=false
+      # First user (admin)
+      - ZITADEL_FIRSTINSTANCE_ORG_HUMAN_USERNAME=admin@local.test
+      - ZITADEL_FIRSTINSTANCE_ORG_HUMAN_PASSWORD=Admin123!
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - '8080:8080'
+    networks:
+      - zitadel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/debug/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  db:
+    image: postgres:16-alpine
+    container_name: zitadel-db
+    environment:
+      - POSTGRES_USER=zitadel
+      - POSTGRES_PASSWORD=zitadel
+      - POSTGRES_DB=zitadel
+    volumes:
+      - zitadel-db-data:/var/lib/postgresql/data
+    networks:
+      - zitadel-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zitadel -d zitadel"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  zitadel-network:
+
+volumes:
+  zitadel-db-data:

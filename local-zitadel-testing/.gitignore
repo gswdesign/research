@@ -1,0 +1,33 @@
+# Token cache - never commit tokens!
+tokens/
+*.token
+*-token.json
+cached-token.json
+
+# Zitadel keys
+*.key.json
+service-account-key*.json
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Node modules (mock server)
+mocks/node_modules/
+mocks/package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# Docker volumes
+docker/data/
+
+# IDE
+.idea/
+.vscode/
+*.swp
