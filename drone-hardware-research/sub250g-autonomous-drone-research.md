@@ -418,6 +418,304 @@ CV/AI Budget:          ~92g
 
 ---
 
+## 5A. Hailo Alternatives & Equivalents (Edge AI Accelerators)
+
+This section compares dedicated edge AI accelerators suitable for lightweight drone builds, focusing on alternatives to the Hailo-8L.
+
+### Comparison Overview
+
+| Accelerator | Performance | Power | Weight (est.) | Interface | Form Factor | Price (est.) |
+|-------------|-------------|-------|---------------|-----------|-------------|--------------|
+| **Hailo-8L** | 13 TOPS | ~1.5W | ~5g | M.2 | 22×30mm | £65 |
+| **Google Coral USB** | 4 TOPS | ~2W | ~18g | USB 3.0 | 65×30mm | £50 |
+| **Coral M.2 Dual TPU** | 8 TOPS | ~4W | ~5g | M.2 A+E | 22×30mm | £35 |
+| **Kneron KL720** | 1.5 TOPS | ~1.2W | ~3g | USB/MIPI | Module | £40 |
+| **MemryX MX3** | 5 TFLOPS | 0.5-2W | ~8g | M.2/PCIe | 22×80mm | £80 |
+| **Axera AX630C** | 3.2 TOPS | ~1.5W | ~10g | SoC | Module | £35 |
+| **Axera AX8850** | 24 TOPS | ~3W | ~8g | M.2 | 22×42mm | £60 |
+
+---
+
+### 5A.1 Google Coral TPU (USB & M.2)
+
+#### USB Accelerator
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **~18g** (with short cable) |
+| Performance | **4 TOPS** (INT8) |
+| Power | 2W typical, 2.5W peak |
+| Interface | USB 3.0 (USB 2.0 compatible) |
+| Dimensions | 65×30×8mm |
+| Frameworks | TensorFlow Lite |
+
+**Pros:**
+- Plug-and-play, no carrier board needed
+- Mature software ecosystem
+- Wide model support (MobileNet, EfficientDet, etc.)
+- Works with Pi Zero 2W via USB
+
+**Cons:**
+- Heavier than M.2 alternatives
+- USB overhead reduces effective throughput
+- 4 TOPS is dated compared to newer options
+- Getting harder to source (discontinued rumors)
+
+#### M.2 Dual Edge TPU
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **~5g** (module only) |
+| Performance | **8 TOPS** (4 TOPS × 2) |
+| Power | 4W (both TPUs active) |
+| Interface | M.2 A+E Key |
+| Dimensions | 22×30mm (2230) |
+
+**Pros:**
+- Compact and lightweight
+- Double the performance of USB version
+- Lower cost ($40 USD)
+
+**Cons:**
+- Requires M.2 carrier board (adds weight)
+- Not compatible with Pi Zero 2W
+- Higher power than single TPU
+
+**Best For:** Prototyping, proven ecosystem, if weight isn't critical
+
+**Source:** [Google Coral](https://www.coral.ai/products/)
+
+---
+
+### 5A.2 Kneron KL720 (Best Power Efficiency)
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **~3-5g** (bare module) |
+| Performance | **1.5 TOPS** @ 1.2W |
+| Efficiency | **1.25 TOPS/W** |
+| Interface | USB 3.0, USB 2.0, MIPI CSI |
+| Memory | 128MB LPDDR3 |
+| Video | 4K image, 1080p video |
+| CPU | ARM Cortex-M4 |
+
+**Key Features:**
+- 2-4× more power-efficient than competitors
+- Built-in MIPI CSI camera interface
+- Supports full natural language processing
+- On-chip image signal processor (ISP)
+- Runs popular CNN models (TinyYOLO, MobileNet, ResNet)
+
+**Available Modules:**
+- **AAEON M2AI-2280-720:** M.2 2280 form factor
+- **AAEON MINI-AI-720:** Ultra-compact standalone module
+
+**Pros:**
+- Excellent power efficiency for battery-powered drones
+- Direct camera connection (no separate ISP needed)
+- Compact form factor options
+- Lower cost than Hailo
+
+**Cons:**
+- Lower raw performance (1.5 TOPS vs 13 TOPS)
+- Smaller software ecosystem
+- Less community support
+
+**Best For:** Power-constrained builds, direct camera integration, long flight times
+
+**Source:** [Kneron KL720](https://www.kneron.com/KL720)
+
+---
+
+### 5A.3 MemryX MX3 (Best Developer Experience)
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **~8g** (M.2 module) |
+| Performance | **5 TFLOPS** (BFloat16) |
+| Power | 0.5-2W (model dependent) |
+| Interface | M.2 M-Key, PCIe Gen 3 x2/x4 |
+| Form Factor | 22×80mm (2280) |
+| On-chip Memory | ~40MB (across 4 cores) |
+| Temperature | -40°C to +85°C industrial |
+
+**Key Features:**
+- 10-100× smaller than competing GPU cores
+- Fanless operation possible
+- Supports TensorFlow, PyTorch, ONNX, Keras, LiteRT
+- Widest operator support among NPUs
+- Real-time video obstacle detection
+- Edge Impulse integration
+
+**Pros:**
+- **Most developer-friendly NPU** - easiest to adopt
+- Excellent framework compatibility
+- Low power consumption
+- Industrial temperature range
+- Good for autonomous navigation
+
+**Cons:**
+- Requires M.2 slot (needs carrier board)
+- On-chip memory limits large transformer models
+- 2280 form factor is longer than 2230/2242
+
+**Best For:** Rapid prototyping, CV model deployment, developers new to NPUs
+
+**Source:** [MemryX](https://memryx.com/products/)
+
+---
+
+### 5A.4 Axera AX630C (Best Value SoC)
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **~10g** (with carrier, varies) |
+| NPU Performance | **3.2 TOPS** (INT8), 12.8 TOPS (INT4) |
+| Power | **~1.5W** operating |
+| Memory | 4GB LPDDR4 (1GB user, 3GB HW accel) |
+| Storage | 32GB eMMC |
+| Camera | Dual MIPI CSI, 4K AI-ISP |
+| Display | MIPI DSI |
+
+**Key Features:**
+- **Night vision AI-ISP** built-in
+- Dual camera support with stitching
+- Comparable to Jetson Orin Nano at fraction of price/power
+- Pre-installed LLM support (Qwen2.5-0.5B)
+- YOLO11, MobileNet, ResNet support
+- Speech: KWS, ASR, TTS built-in
+
+**Available Products:**
+- **M5Stack LLM630:** Complete kit with AX630C
+- Various SoM modules from Chinese vendors
+
+**Pros:**
+- Excellent price/performance ratio
+- Built-in night vision ISP
+- Complete SoC (no separate camera processor needed)
+- Low power consumption
+- LLM capability is a bonus
+
+**Cons:**
+- Smaller Western ecosystem/documentation
+- Most products from Chinese vendors
+- May need translation for some documentation
+
+**Best For:** Night vision drones, budget builds, dual-camera setups
+
+**Source:** [Axera AX630C](https://en.axera-tech.com/Product/126.html)
+
+---
+
+### 5A.5 Axera AX8850 (Highest Performance)
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **~8g** (M.2 module) |
+| Performance | **24 TOPS** (INT8) |
+| Power | ~3W |
+| Interface | M.2 M-Key (2242) |
+| Form Factor | 22×42mm |
+
+**Key Features:**
+- Highest TOPS in compact M.2 form factor
+- Nearly 2× Hailo-8L performance
+- Available from Radxa (AICore AX-M1) and M5Stack
+
+**Available Products:**
+- **Radxa AICore AX-M1:** M.2 2242 module
+- **M5Stack LLM-8850:** M.2 AI accelerator card
+
+**Pros:**
+- Best raw performance for the weight
+- Compact 2242 form factor
+- Multiple vendor options
+
+**Cons:**
+- Higher power consumption than Hailo-8L
+- Requires M.2 carrier board
+- Newer, less mature ecosystem
+
+**Best For:** Complex multi-model inference, high-FPS object detection
+
+**Source:** [Radxa AICore AX-M1](https://radxa.com/products/)
+
+---
+
+### 5A.6 Rockchip RK3588 NPU (Integrated Option)
+
+| Specification | Value |
+|---------------|-------|
+| NPU Performance | **6 TOPS** |
+| CPU | 4× A76 + 4× A55 |
+| GPU | Mali G610 |
+| Power | 5-15W (full SoC) |
+
+**Available Compact Modules:**
+- **Turing RK1:** SODIMM form factor, Jetson Nano compatible
+- **ArmSoM AIM7:** 260-pin, Jetson Nano carrier compatible
+- **Various SoMs:** From Firefly, Forlinx, Radxa
+
+**Pros:**
+- Integrated NPU + powerful CPU + GPU
+- 6 TOPS is competitive
+- Jetson-compatible options available
+- Strong Linux support
+
+**Cons:**
+- Full SoC is power-hungry for this drone build
+- Modules are heavier (15-25g typical)
+- Overkill for simple CV tasks
+
+**Best For:** If you need general compute + AI, not weight-optimized
+
+**Source:** [Rockchip RK3588](https://www.rock-chips.com/uploads/pdf/2022.8.26/192/RK3588%20Brief%20Datasheet.pdf)
+
+---
+
+### 5A.7 Hailo Alternatives Summary
+
+#### For Sub-250g Drone (Weight Priority)
+
+| Priority | Recommendation | Why |
+|----------|----------------|-----|
+| **Best Overall** | **Kneron KL720** | Lightest (~3g), lowest power (1.2W), direct MIPI camera |
+| **Best Performance** | **Axera AX630C SoC** | 3.2 TOPS, night vision ISP, complete solution |
+| **Best Ecosystem** | **Google Coral USB** | Mature software, works with Pi Zero 2W |
+| **Best Dev Experience** | **MemryX MX3** | Easiest framework support, good docs |
+| **Highest TOPS** | **Axera AX8850** | 24 TOPS in M.2 2242, if you have carrier |
+
+#### Weight-Optimized Recommendations
+
+For your ~92g CV/AI budget:
+
+1. **Lightest AI Option (~18g total):**
+   - Kneron KL720 module (~4g) + MIPI camera (~4g) + Pi Zero 2W (10g)
+   - 1.5 TOPS, excellent power efficiency
+
+2. **Best Performance/Weight (~25g total):**
+   - LuckFox Pico Mini (5g, 0.5 TOPS built-in) + external Kneron KL720 (4g) + camera (4g) + wiring
+   - Dual NPU approach: LuckFox for preprocessing, KL720 for inference
+
+3. **Simplest Integration (~20g total):**
+   - Axera AX630C module (~10g) + MIPI camera (~4g) + wiring
+   - Complete SoC with NPU, ISP, and camera interface
+
+#### Hailo vs Alternatives Decision Matrix
+
+| Factor | Hailo-8L | Coral USB | Kneron KL720 | MemryX MX3 | Axera AX630C |
+|--------|----------|-----------|--------------|------------|--------------|
+| Raw TOPS | 13 | 4 | 1.5 | 5 | 3.2 |
+| Weight | ~5g | ~18g | ~4g | ~8g | ~10g |
+| Power | 1.5W | 2W | 1.2W | 0.5-2W | 1.5W |
+| Pi Zero 2W Compatible | ❌ | ✅ | ✅ | ❌ | ❌ |
+| Camera Interface | None | None | MIPI CSI | None | Dual MIPI |
+| Software Maturity | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| Availability | Good | Declining | Good | Good | Good |
+| Price | £65 | £50 | £40 | £80 | £35 |
+
+---
+
 ## 6. Proposed CV/AI Combinations
 
 ### Option A: Lightweight Autonomous (Recommended)
@@ -624,6 +922,13 @@ For a **balanced autonomous drone** prioritizing reliability and capability:
 ### AI Accelerators
 - [Google Coral](https://www.coral.ai/products/)
 - [Hailo-8L](https://hailo.ai/products/ai-accelerators/hailo-8l-m-2-ai-acceleration-module-for-ai-light-applications/)
+- [Kneron KL720](https://www.kneron.com/KL720)
+- [MemryX MX3](https://memryx.com/products/)
+- [Axera AX630C](https://en.axera-tech.com/Product/126.html)
+- [Radxa AICore AX-M1 (AX8850)](https://radxa.com/products/)
+- [M5Stack LLM-8850](https://shop.m5stack.com/products/ai-8850-llm-accleration-m-2-module-ax8850)
+- [Rockchip RK3588 Datasheet](https://www.rock-chips.com/uploads/pdf/2022.8.26/192/RK3588%20Brief%20Datasheet.pdf)
+- [Seeed Hailo vs Coral Comparison](https://www.seeedstudio.com/blog/2024/07/16/raspberry-pi-ai-kit-vs-coral-usb-accelerator-vs-coral-m-2-accelerator-with-dual-edge-tpu/)
 
 ### Regulations
 - [UK CAA Drone Code](https://register-drones.caa.co.uk/drone-code/where-you-can-fly)
