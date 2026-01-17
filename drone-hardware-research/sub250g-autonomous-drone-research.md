@@ -299,6 +299,44 @@ CV/AI Budget:          ~87.5g
 
 ---
 
+### 3.5 D430 Alternatives Comparison (2025/2026)
+
+| Depth Camera | Weight | Resolution | Range | On-device AI | Interface | Notes |
+|--------------|--------|------------|-------|--------------|-----------|-------|
+| **Intel D430 + D4** | **~19g** | 1280×800 | 0.2-10m | No | USB 3.0 | Proven, indoor-optimized |
+| Intel D421 | ~25-30g | 1280×800 | 0.2-10m | No | USB 3.0 | All-in-one module, newer |
+| OAK-D Lite | **~61g** | 640×480 stereo | 0.2-19m | **4 TOPS** | USB 3.0 | On-device NN, heavier |
+| OAK-D SR | 72g | 1MP stereo | 0.3-1m | 4 TOPS | USB 3.0 | Short-range only |
+| OAK-FFC 4P (no case) | ~41g + cams | Flexible | Varies | 4 TOPS | USB 3.0 | Modular, customizable |
+| Arducam TOF | ~15-20g (est.) | 240×180 | 0.02-4m | No | MIPI CSI | Low-res, Pi-native |
+| PMD pico flexx | **8g** | 224×171 | 0.1-4m | No | USB | **Discontinued** |
+| Terabee Evo 3D | ~12g | 80×60 (8×8 zones) | 0.1-5m | No | I2C/UART | Low-res depth zones |
+
+**Key Findings:**
+
+1. **D430 + D4 at ~19g is hard to beat** for true stereo depth at this weight
+2. **PMD pico flexx was 8g** but discontinued - successor flexx2 heavier
+3. **OAK-D Lite** adds on-device AI but 3× heavier (~61g)
+4. **Arducam TOF** is lighter but much lower resolution (240×180 vs 1280×800)
+
+**Best Alternatives by Use Case:**
+
+| Use Case | Best Option | Weight | Why |
+|----------|-------------|--------|-----|
+| **Lightest depth** | Intel D430 + D4 | ~19g | Best resolution/weight ratio |
+| **On-device AI + depth** | OAK-FFC 4P (bare) | ~45g | 4 TOPS neural inference built-in |
+| **Ultra-light TOF** | Arducam TOF | ~15g | If 240×180 is sufficient |
+| **Zone-based depth** | Terabee Evo 3D | ~12g | 64-zone depth map, very light |
+
+**2026 Watch List:**
+- **Luxonis OAK-D Lite v2** - rumored lighter version
+- **Intel D421** - all-in-one may get lighter variants
+- **Arducam stereo modules** - new global shutter stereo options
+
+**Source:** [Luxonis OAK Comparison](https://docs.luxonis.com/hardware/platform/comparison/vs-realsense/)
+
+---
+
 ### Camera Recommendation Summary
 
 | Use Case | Recommended Camera | Weight | Resolution |
