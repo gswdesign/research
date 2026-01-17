@@ -249,14 +249,66 @@ CV/AI Budget:          ~87.5g
 
 ---
 
+### 3.4 Intel RealSense D430 Depth Module (MicoAir Reference Setup)
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **13g** (module only) |
+| Dimensions | 70.5 × 10.3 × 13.8mm |
+| Depth Resolution | **1280×800** (~1.02MP equivalent) |
+| Depth FPS | 30fps @ 1280×720, 90fps @ 848×480 |
+| Shutter | **Global Shutter** (stereo) |
+| Field of View | 91.2° × 65.5° × 100.6° (H×V×D) |
+| Baseline | 50mm |
+| Operating Range | 0.2m - 10m |
+| Technology | Active IR Stereoscopic |
+| Interface | 50-pin Board-to-Board connector |
+| Power | <1.5W |
+
+**Requires Vision Processor D4 Board:**
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **~5-8g** (estimated) |
+| Dimensions | 73 × 16 × 4mm |
+| Interface | USB 3.0 Type-C |
+| Function | Depth processing, USB output |
+
+**Combined D430 + D4 Board Weight: ~18-21g**
+
+**Key Features:**
+- True depth sensing (not just optical flow)
+- Global shutter eliminates motion artifacts
+- Works in low-light with IR projector
+- Designed for robotics and drone applications
+- Indoor optimized (outdoor use limited)
+
+**Why Use for Autonomous Drones:**
+- 3D obstacle avoidance
+- SLAM (Simultaneous Localization and Mapping)
+- Precise landing with depth perception
+- Object distance measurement
+- Works with ROS and PX4 via companion computer
+
+**Limitations:**
+- Indoor use primarily (struggles in direct sunlight)
+- Requires companion computer (Pi CM5/Jetson) for processing
+- USB interface needs processor board
+
+**Source:** [Intel RealSense D430](https://www.intel.com/content/www/us/en/products/sku/98320/intel-realsense-depth-module-d430/specifications.html)
+
+---
+
 ### Camera Recommendation Summary
 
-| Use Case | Recommended Camera | Weight |
-|----------|-------------------|--------|
-| General CV/SLAM | ArduCam OV9281 (global shutter) | ~4g |
-| Object Detection | Pi Camera 3 or OV5640 | ~14g |
-| AprilTag/Markers | ArduCam OV9281 | ~4g |
-| Low-light | Pi Camera 3 NoIR | ~14g |
+| Use Case | Recommended Camera | Weight | Resolution |
+|----------|-------------------|--------|------------|
+| General CV/SLAM | ArduCam OV9281 (global shutter) | ~4g | 1MP (1280×800) |
+| Object Detection | Pi Camera 3 or OV5640 | ~14g | 12MP / 5MP |
+| AprilTag/Markers | ArduCam OV9281 | ~4g | 1MP |
+| Low-light | Pi Camera 3 NoIR | ~14g | 12MP |
+| **3D Depth/SLAM** | **Intel D430 + D4 board** | **~20g** | **1MP depth (1280×800)** |
+| Obstacle Avoidance | Intel D430 + D4 board | ~20g | 1MP depth |
 
 ---
 
@@ -290,6 +342,55 @@ CV/AI Budget:          ~87.5g
 **Best For:** Basic CV, telemetry relay, simple autonomous missions
 
 **Source:** [Raspberry Pi](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/)
+
+---
+
+### 4.1a Raspberry Pi CM5 + Carrier (MicoAir Reference Setup)
+
+| Specification | Value |
+|---------------|-------|
+| CM5 Module Weight | **~12-14g** (same form factor as CM4) |
+| Carrier Board Weight | **15-40g** (varies by carrier) |
+| CPU | Quad-core Cortex-A76 @ 2.4GHz |
+| RAM | 2GB/4GB/8GB LPDDR4X |
+| Storage | 0GB (Lite) / 16GB / 32GB / 64GB eMMC |
+| Wireless | WiFi 5, BT 5.0 (wireless variants) |
+| PCIe | PCIe 2.0 x1 (for NVMe/AI accelerator) |
+| Camera | 2× 4-lane MIPI CSI-2 |
+| USB | USB 3.0 |
+
+**Compact Carrier Options:**
+
+| Carrier | Weight | Features |
+|---------|--------|----------|
+| CM5 MINIMA (Seeed) | ~25g (est.) | M.2 for Hailo/SSD, CSI, Ethernet |
+| Custom minimal | ~15g (est.) | USB, power, CSI only |
+| Piunora | ~20g (est.) | M.2 B-Key, USB-C |
+
+**Total System Weight (CM5 + Minimal Carrier): ~27-40g**
+
+**Why CM5 for Autonomous Drones:**
+- **Full Pi 5 performance** in compact module
+- PCIe for M.2 AI accelerators (Hailo-8L, Coral)
+- Dual CSI camera ports for stereo/depth
+- ROS2 + RealSense SDK support
+- PX4 MAVROS companion computer ready
+- USB 3.0 for Intel RealSense D430
+
+**Compared to Pi Zero 2W:**
+- 5× faster CPU (A76 vs A53)
+- Up to 16× more RAM (8GB vs 512MB)
+- PCIe for AI accelerators
+- But 3-4× heavier with carrier
+
+**Best For:** RealSense depth cameras, ROS2/SLAM, AI inference with Hailo/Coral, advanced autonomy
+
+**MicoAir Reference Configuration:**
+- CM5 (4GB) + minimal carrier: ~30g
+- Intel RealSense D430 + D4 board: ~20g
+- **Total CV system: ~50g**
+
+**Source:** [Raspberry Pi CM5](https://www.raspberrypi.com/products/compute-module-5/)
 
 ---
 
@@ -875,14 +976,49 @@ For your ~92g CV/AI budget:
 
 ---
 
+### Option E: RealSense Depth + CM5 (MicoAir Reference - Advanced SLAM)
+
+**Total CV/AI Weight: ~55g**
+
+| Component | Model | Weight | Purpose |
+|-----------|-------|--------|---------|
+| Companion Computer | Raspberry Pi CM5 (4GB) | 12g | ROS2, SLAM processing |
+| Carrier Board | Minimal custom/CM5 MINIMA | 20g | USB3, power |
+| Depth Camera | Intel RealSense D430 | 13g | 3D depth sensing |
+| Vision Processor | D4 Board | 6g | Depth USB output |
+| Extras | Wiring, mounts | 4g | Integration |
+
+**Total Drone Weight: ~212g** (with MTF-01 base)
+
+**Capabilities:**
+- True 3D depth perception (0.2-10m range)
+- Full SLAM (ROS2 + RTAB-Map)
+- Obstacle avoidance with depth
+- Indoor autonomous navigation
+- Global shutter stereo vision
+- PX4 offboard control via MAVROS
+
+**Power Consumption:** ~4-6W
+
+**Notes:**
+- This is the MicoAir reference setup for advanced autonomous flight
+- D430 is indoor-optimized (IR struggles in sunlight)
+- Requires USB 3.0 bandwidth for depth streaming
+- Can add Hailo-8L via M.2 for object detection (+5g, +13 TOPS)
+
+**Source:** [MicoAir YouTube Tutorials](https://www.youtube.com/@MicoAirTech)
+
+---
+
 ## 7. Weight Summary by Configuration
 
 | Configuration | Base | CV/AI | Total | Under 250g |
 |--------------|------|-------|-------|------------|
-| **Option A** (Pi Zero 2W + OV9281) | 153g | 25g | **178g** | ✅ 72g margin |
-| **Option B** (Radxa Zero 3W + Pi Cam 3) | 153g | 35g | **188g** | ✅ 62g margin |
-| **Option C** (OpenMV H7+ + XIAO) | 153g | 30g | **183g** | ✅ 67g margin |
-| **Option D** (LuckFox Ultra-light) | 153g | 15g | **168g** | ✅ 82g margin |
+| **Option A** (Pi Zero 2W + OV9281) | 157.5g | 25g | **182.5g** | ✅ 67g margin |
+| **Option B** (Radxa Zero 3W + Pi Cam 3) | 157.5g | 35g | **192.5g** | ✅ 57g margin |
+| **Option C** (OpenMV H7+ + XIAO) | 157.5g | 30g | **187.5g** | ✅ 62g margin |
+| **Option D** (LuckFox Ultra-light) | 157.5g | 15g | **172.5g** | ✅ 77g margin |
+| **Option E** (CM5 + RealSense D430) | 157.5g | 55g | **212.5g** | ✅ 37g margin |
 
 All options provide comfortable margin for:
 - Additional sensors (optical flow, rangefinder)
@@ -976,6 +1112,9 @@ For a **balanced autonomous drone** prioritizing reliability and capability:
 
 ### Companion Computers
 - [Raspberry Pi Zero 2W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/)
+- [Raspberry Pi CM5](https://www.raspberrypi.com/products/compute-module-5/)
+- [Raspberry Pi CM5 Datasheet](https://pip.raspberrypi.com/documents/RP-008180-DS-cm5-datasheet.pdf)
+- [CM5 MINIMA Carrier Board](https://www.seeedstudio.com/CM5-MINIMA-p-6485.html)
 - [Radxa Zero 3W](https://radxa.com/products/zeros/zero3w/)
 - [Seeed XIAO ESP32S3 Sense](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html)
 - [LuckFox Pico Mini](https://www.luckfox.com/Luckfox-Pico-Mini-A)
@@ -984,6 +1123,9 @@ For a **balanced autonomous drone** prioritizing reliability and capability:
 ### Cameras
 - [Raspberry Pi Camera Module 3](https://www.raspberrypi.com/products/camera-module-3/)
 - [ArduCam OV9281](https://www.arducam.com/product/mini-ov9281-mono-global-shutter-for-pi/)
+- [Intel RealSense D430 Depth Module](https://www.intel.com/content/www/us/en/products/sku/98320/intel-realsense-depth-module-d430/specifications.html)
+- [Intel RealSense D400 Series Datasheet](https://cdrdv2-public.intel.com/841984/Intel-RealSense-D400-Series-Datasheet.pdf)
+- [Intel RealSense Vision Processor D4](https://www.intel.com/content/www/us/en/products/sku/126367/intel-realsense-vision-processor-d4/specifications.html)
 
 ### AI Accelerators
 - [Google Coral](https://www.coral.ai/products/)
