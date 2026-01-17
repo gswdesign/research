@@ -90,6 +90,64 @@ This document researches hardware choices for a sub-250g autonomous drone build 
 
 **Source:** [MicoAir Official](https://micoair.com/flightcontroller_micoair743_aio_35a/)
 
+**MicoAir YouTube Tutorials:**
+- [Setup Optical Flow & Lidar (MTF-01) for ArduPilot/PX4](https://youtube.com/watch?v=D-ooFHEtQoo)
+- [Setup Optical Flow & Lidar (MTF-01) for INAV6](https://youtube.com/watch?v=bEKm-PGRnks)
+
+---
+
+### 1.4a MicoAir MTF-01 Optical Flow & Lidar Sensor (Recommended Add-on)
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **4.5g** |
+| Dimensions | 29 × 16.5 × 15mm |
+| Optical Flow Sensor | PMW3901 |
+| Range Sensor | TOF (Time of Flight) |
+| Range Distance | 0.02-8m (±2% accuracy) |
+| Ambient Light Resistance | Up to 70K Lux |
+| Min Height | 8cm |
+| Max Speed | 7 m/s @ 1m altitude |
+| Optical Flow FoV | 42° |
+| Min Light Required | 60 Lux |
+| Operating Voltage | 4.0-5.5V |
+| Interface | UART |
+| Protocol Support | **ArduPilot, PX4, INAV** |
+
+**Key Features:**
+- 2-in-1 sensor combining optical flow + lidar rangefinder
+- Works in outdoor sunlight (70K Lux resistance)
+- Direct UART connection to MicoAir743 flight controller
+- No complex development - plug and configure
+- MicoAssistant software for protocol switching
+
+**Why Essential for Autonomous Flight:**
+- Enables precise indoor hovering without GPS
+- Provides altitude hold via TOF sensor
+- Ground-relative velocity for position hold
+- Critical for landing pad detection and precision landing
+
+**Configuration Notes:**
+- For indoor-only flight, configure EK3_SRC1 parameters
+- INAV users: Use v7.1.2+ (v7.1.1 has bugs with this sensor)
+- Switch protocols via USB-TTL programmer + MicoAssistant
+
+**Source:** [MicoAir MTF-01](https://micoair.com/optical_range_sensor_mtf-01/)
+
+---
+
+### 1.4b MicoAir MTF-01P (Extended Range Variant)
+
+| Specification | Value |
+|---------------|-------|
+| Weight | **~5g** (estimated) |
+| Range Distance | 0.02-12m |
+| Other specs | Same as MTF-01 |
+
+**Notes:** The MTF-01P offers 50% more range (12m vs 8m) for applications requiring greater altitude sensing. Slightly heavier but useful for outdoor autonomous operations.
+
+**Source:** [MicoAir MTF-01P](https://micoair.com/optical_range_sensor_mtf-01p/)
+
 ---
 
 ### 1.5 Battery: GNB 4S 850mAh HV (60C Long Range)
@@ -119,20 +177,23 @@ This document researches hardware choices for a sub-250g autonomous drone build 
 | Motors (4× F1404) | 37g |
 | Props (4× T3.5×2.5×3) | 6g |
 | Flight Controller (MicoAir743-AIO) | ~11g |
+| Optical Flow/Lidar (MTF-01) | 4.5g |
 | Battery (GNB 4S 850mAh) | 73g |
-| **Subtotal** | **~153g** |
+| **Subtotal** | **~157.5g** |
 
 ### Remaining Budget for CV/AI System
 
 ```
 Target Max Weight:     250g
-Base Platform:        -153g
+Base Platform:        -157.5g
 Wiring/Misc (~5g):     -5g
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
-CV/AI Budget:          ~92g
+CV/AI Budget:          ~87.5g
 ```
 
-**Available weight for camera + companion computer + AI accelerator: ~90-95g**
+**Available weight for camera + companion computer + AI accelerator: ~85-90g**
+
+**Note:** The MTF-01 optical flow/lidar provides basic autonomous hover capability without needing a companion computer. Add CV/AI only if you need object detection, tracking, or advanced autonomy beyond GPS waypoints.
 
 ---
 
@@ -904,9 +965,14 @@ For a **balanced autonomous drone** prioritizing reliability and capability:
 - [T-Motor F1404](https://pyrodrone.com/products/t-motor-f1404-micro-long-range-motors-3800kv)
 - [HQProp T3.5×2.5×3](https://www.hqprop.com/hqprop-t35x25x3-2cw2ccw-poly-carbonate-p0354.html)
 
-### Flight Controller & Battery
+### Flight Controller, Sensors & Battery
 - [MicoAir743-AIO-35A](https://micoair.com/flightcontroller_micoair743_aio_35a/)
+- [MicoAir MTF-01 Optical Flow & Lidar](https://micoair.com/optical_range_sensor_mtf-01/)
+- [MicoAir MTF-01P (12m range)](https://micoair.com/optical_range_sensor_mtf-01p/)
+- [MicoAir YouTube - MTF-01 ArduPilot/PX4 Setup](https://youtube.com/watch?v=D-ooFHEtQoo)
+- [MicoAir YouTube - MTF-01 INAV Setup](https://youtube.com/watch?v=bEKm-PGRnks)
 - [GNB 4S 850mAh](https://pyrodrone.com/products/gaoneng-gnb-850mah-4s-15-2v-60c-120c-xt30)
+- [Oscar Liang - Optical Flow Setup Guide](https://oscarliang.com/setup-optical-flow-rangefinder-inav/)
 
 ### Companion Computers
 - [Raspberry Pi Zero 2W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/)
