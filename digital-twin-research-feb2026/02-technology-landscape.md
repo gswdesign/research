@@ -15,6 +15,10 @@ UE 5.5 introduced **Pixel Streaming 2**, a rebuilt plugin using a new WebRTC abs
 | Project | Application |
 |---------|------------|
 | **Renault x Publicis Sapient** | Full digital twin of Champs-Elysees showroom via Pixel Streaming — avatars, chat, multilingual |
+| **NEOM Mirrana (Tonomus)** | Cognitive digital twin PaaS — UE rendering + Pixel Streaming for Oxagon, THE LINE. Partnered with Oracle + NVIDIA |
+| **IMERZA — Diriyah + Qiddiya** | Epic Games' official US partner studio — large-scale architectural UE twins for Saudi giga-projects (acquired by Together Group Feb 2025) |
+| **Riyadh City Twin** | 1,973 km² UE5 twin by Chameleon Interactive — Diriyah, Qiddiya, Green Riyadh on 4m x 3m display |
+| **NEOM Venice "Flying Landscape"** | Squint/Opera — UE5 installation enabling visitors to fly across NEOM, showcased at Venice |
 | **EDGE Liverpool Street** | Zero-carbon office digital twin for remote and on-site sales via Pixel Streaming |
 | **Ramboll (AEC)** | Massive engineering digital twins streamed via Eagle 3D, replacing local executables with web links |
 | **Penn's Landing Philadelphia** | City-scale infrastructure digital twin using Cesium + UE5 |
@@ -42,11 +46,23 @@ VMI already builds production Unreal Engine digital twins for Saudi giga-project
 | **Safari WebGPU** (Sep 2025) | Apple ships native WebGPU on iOS 26 + macOS 26 — universal browser GPU compute |
 
 ### Industry Adoption
-- **Zillow SkyTours** — first major real estate platform shipping 3DGS property tours
+- **Zillow SkyTours** — first major real estate platform shipping 3DGS (drone → navigable aerial views)
 - **Apartments.com** — exterior 3DGS via Matterport 3D Exteriors
 - **Superman (film)** — first major motion picture using dynamic Gaussian Splatting
 - **OTOY OctaneRender 2026** — full path-traced Gaussian splat support
 - **Meta Hyperscape** — photorealistic 3DGS scenes on Quest headsets
+
+### 3DGS Real Estate Specialist Platforms (Emerging)
+| Platform | What It Does |
+|----------|-------------|
+| **Splatterport** | Dedicated 3DGS virtual tour platform for real estate agents |
+| **Splat Labs / PortalCam** | "First true spatial camera" for interiors — walk naturally, capture in minutes, cloud-processed splats |
+| **MATRIX (Gaussian VR)** | VR property-viewing solution — smartphone footage → full 3D environment with free movement |
+| **ImmoGS (TUM-XR)** | Academic XR platform — metrically accurate apartment tours, virtual furniture placement, Meta Quest 3 support |
+| **AR Splat (AR Code)** | Video → interactive 3D AR property tours, activated via QR codes on any device |
+
+### 3DGS vs Traditional Virtual Tours
+Traditional tours (Matterport, Ricoh) use stitched 360-degree photos where movement feels like "teleporting" between fixed points. 3DGS enables **smooth, continuous navigation** with true depth perception and accurate scale. Models are up to **10x lighter** than traditional GLB files and overcome photogrammetry failures with transparent/reflective surfaces. Can be captured with a **smartphone** — no expensive camera rigs.
 
 ### Web Viewers
 - **Spark** (World Labs) — current leader, named one of GitHub's most influential libraries of 2025

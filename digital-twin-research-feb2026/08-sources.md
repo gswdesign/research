@@ -72,6 +72,51 @@
 - [AI Moves Into Real Estate — PwC](https://www.pwc.com/us/en/industries/financial-services/asset-wealth-management/real-estate/emerging-trends-in-real-estate-pwc-uli/trends/ai-moves-into-real-estate.html)
 - [Commercial Real Estate AI Strategy 2026 — StackDC](https://www.stackdc.com/blog/commercial-real-estate-ai-strategy-2026/)
 
+## NEOM / Tonomus
+- [Mirrana — Tonomus/NEOM Cognitive Digital Twin](https://tonomus.neom.com/en-us/what-we-do/cognitive-solutions/mirrana)
+- [Squint/Opera Develops Digital Exhibition for NEOM in Venice — Blooloop](https://blooloop.com/museum/news/squint-opera-neom-venice/)
+- [NEOM Tech Steps Into the Future as Tonomus](https://www.neom.com/en-us/newsroom/tonomus-launch)
+- [TONOMUS Teams with Oracle and NVIDIA](https://www.neom.com/en-us/newsroom/tonomus-oracle-nvidia)
+
+## Diriyah — Digital Twin & Immersive
+- [Together Group Acquires IMERZA and Visualisation One — PR Newswire](https://www.prnewswire.com/news-releases/together-group-acquires-animation-and-technology-studios-imerza-and-visualisation-one-to-reimagine-digital-experiences-and-entertainment-in-luxury-302383643.html)
+- [Diriyah Immersive Experience — Immersive-me](https://www.immersive-me.com/portfolio/diriyah/)
+- [Diriyah Immersive Experience — Away Studio](https://www.awaystudio.co.uk/work-1/project-three-sng7y-h4fzd-n6meh-yatks-mxdpl-xe5dj)
+- [Riyadh Digital Twin — Chameleon Interactive](https://chameleon-interactive.com/project/riyadh-digital-twin-a-new-dimension-in-urban-visualization/)
+
+## ROSHN
+- [ROSHN Launches ROSHNEXT — Zawya](https://www.zawya.com/en/press-release/companies-news/roshn-group-launches-roshnext-to-drive-innovation-in-the-real-estate-industry-ckjtwoo2)
+- [Saudis Sold on Online Home Sales, Says Developer ROSHN — AGBI](https://www.agbi.com/real-estate/2025/01/saudis-sold-on-online-home-sales-says-developer-roshn/)
+- [ROSHN Banking on Technology — Arab News](https://www.arabnews.com/node/2294936/business-economy)
+- [ROSHN Using AI to Enhance Efficiency — Arab News](https://www.arabnews.com/node/2589841/saudi-arabia)
+- [ROSHN Showcases at LEAP 2025](https://www.roshn.sa/news-and-events/press-releases/article-39)
+- [ROSHN Hackathon 2025](https://www.roshn.sa/news-and-events/press-releases/article-78)
+- [ROSHN Revolutionises Property Buying — Zawya](https://www.zawya.com/en/press-release/companies-news/roshn-group-revolutionizes-property-buying-with-roshncom-a-seamless-online-experience-e36o42b2)
+
+## Qiddiya
+- [Qiddiya & Globant PLAY LIFE Partnership](https://qiddiya.com/press-room/qiddiya-globant-partner-immersive-entertainment-hub/)
+- [Qiddiya and Globant Immersive Digital Ecosystem — Blooloop](https://blooloop.com/technology/news/qiddiya-city-globant-immersive-digital-ecosystem/)
+- [Qiddiya Performing Arts Centre — AR/VR/AI — Parametric Architecture](https://parametric-architecture.com/qiddiya-performing-arts-center-incorporates-ar-vr-and-ai-technologies/)
+- [Qiddiya Esports Arena — Populous](https://populous.com/article/qiddiya-city-esports-arena-creates-immersive-gaming-and-esports-experience)
+- [Qiddiya Gaming Global Campaign — The Drum](https://www.thedrum.com/awards-case-study/behind-qiddiya-gamings-futuristic-global-campaign)
+- [Immersive Experiences Reshape Travel — Skift/Qiddiya — Blooloop](https://blooloop.com/immersive/news/immersive-experiences-travel-industry-skift-qiddiya-research/)
+
+## PIF
+- [PIF Launches Company to Accelerate Digital Transformation — Arab News](https://www.arabnews.com/node/2155996/business-economy)
+- [PIF Programme 2021-2025](https://www.pif.gov.sa/en/strategy-and-impact/the-program/)
+- [PIF and JLL Announce FMTECH Investment](https://www.pif.gov.sa/en/news-and-insights/press-releases/2025/pif-and-jll-announce-agreement-for-jll-to-invest-in-fmtech-to-further-advance-the-saudi-facilities-management-sector/)
+- [Saudi PIF Named World's Most Active SWF in 2025 — Gulf News](https://gulfnews.com/world/gulf/saudi/saudi-arabias-public-investment-fund-named-worlds-most-active-swf-in-2025-1.500399307)
+- [RER Leads Saudi Real Estate Digital Revolution — International Finance](https://internationalfinance.com/magazine/industry-magazine/rer-leads-saudi-real-estates-digital-revolution/)
+- [PropTech in Saudi Arabia — Setup in Saudi](https://www.setupinsaudi.com/en/news/success-stories/proptech-in-saudi-arabia-transforming-real-estate-landscape-and-driving-business-expansion)
+
+## 3DGS Real Estate Platforms
+- [Splatterport — 3DGS Virtual Tours](https://www.splatterport.com/)
+- [Splat Labs / PortalCam — Residential Real Estate](https://www.splatlabs.ai/blog/dataset-real-estate-home)
+- [MATRIX Launches Gaussian VR Property Viewing — LAVNCH](https://lavnch.com/lavnchcode/matrix-launches-gaussian-vr-real-estate-property-viewing-service/)
+- [ImmoGS: XR Real Estate Platform Using 3DGS — TUM-XR](https://tum-xr.com/xr-academia/immogs/)
+- [Zillow SkyTour 3D Technology — Inman](https://www.inman.com/2025/11/25/zillows-skytour-uses-complex-3d-tech-to-simplify-home-search/)
+- [Rise of 3D Gaussian Splatting — Magnopus](https://www.magnopus.com/blog/the-rise-of-3d-gaussian-splatting)
+
 ## Market Data
 - [Building Twin Market Size — Straits Research](https://straitsresearch.com/report/building-twin-market)
 - [Shapespark — Browser-Based Architectural Visualisation](https://www.shapespark.com/)

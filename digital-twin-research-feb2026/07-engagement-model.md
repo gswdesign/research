@@ -113,11 +113,15 @@
 
 | Competitor Approach | Weakness | VMI + Sapient Advantage |
 |-------------------|----------|------------------------|
-| Matterport / basic virtual tours | Low fidelity, no AI, no off-plan capability | Cinematic-quality Unreal twins + AI intelligence |
+| **IMERZA / Together Group** | Epic's official partner, already doing Diriyah + Qiddiya twins. Strong UE capability but **no AI platform, no enterprise integration, no agentic layer** | VMI matches UE quality + Sapient adds Bodhi AI, CRM integration, analytics. Full-stack vs. visualisation-only |
+| **Globant** (Qiddiya PLAY LIFE) | Already engaged for visitor platform. Strong digital but **not specialised in 3D/spatial** | Don't compete — complement. VMI+Sapient for physical experience + real estate; Globant for visitor app |
+| **Chameleon Interactive** (Riyadh twin) | Built 1,973km² Riyadh twin. Good at city-scale but **no AI platform, no sales integration** | VMI+Sapient deliver the sales intelligence layer on top of visualisation |
+| Matterport / basic virtual tours | Low fidelity, no AI, no off-plan capability | Cinematic-quality Unreal twins + 3DGS + AI intelligence |
+| **Squint/Opera** (NEOM Venice) | Strong creative, good UE5 installations. **No enterprise AI, no sales platform** | VMI+Sapient add the enterprise AI + CRM + analytics layer |
+| NEOM Mirrana (Tonomus in-house) | Powerful PaaS but **focused on construction/operations, not sales/marketing** | VMI+Sapient deliver the experiential sales layer that Mirrana doesn't address |
 | In-house dev teams at PIF entities | Fragmented, no AI platform, slow to build | Integrated platform, Bodhi AI ready, proven Saudi delivery |
 | Pure-play AI companies | No 3D capability, no real estate experience | Full-stack from capture to AI to sales |
 | Traditional CGI studios | Static renders, no interactivity, no data | Real-time, interactive, data-driven, AI-guided |
-| Epic Games / Twinmotion direct | Tool, not a solution; no AI, no sales integration | Complete solution with AI, CRM, analytics |
 | Accenture / Deloitte digital | Generalist, no specialised 3D team, higher cost | Specialist 3D + enterprise AI at competitive cost |
 
 ---
