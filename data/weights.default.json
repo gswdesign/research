@@ -1,0 +1,27 @@
+{
+  "_comment": "Copy this file, edit, and pass with --config to fully customise the model. Any factor omitted from 'weights' falls back to its default in factors.py. growth_tilt: 0=pure liveability, 1=pure growth. risk_penalty_strength: 0..1, how hard risk drags the composite.",
+  "growth_tilt": 0.5,
+  "risk_penalty_strength": 0.4,
+  "london_reference_pte": 10.6,
+  "weights": {
+    "afford_headroom": 1.4,
+    "infra_pipeline": 1.5,
+    "regen_pipeline": 1.2,
+    "planning_momentum": 0.7,
+    "gentrification_momentum": 1.1,
+    "rent_growth": 0.9,
+    "gross_yield": 0.9,
+    "price_momentum_3yr": 0.6,
+    "volume_trend": 0.8,
+    "ptal": 1.0,
+    "mins_to_central": 0.7,
+    "schools": 0.9,
+    "amenity_supermarket": 0.5,
+    "amenity_highstreet": 0.5,
+    "greenspace": 0.6,
+    "safety": 0.7,
+    "risk_cladding": 1.6,
+    "risk_flood": 1.0,
+    "risk_oversupply_exla": 0.9
+  }
+}
