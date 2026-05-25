@@ -172,27 +172,75 @@ def planning_entities(dataset="planning-application", limit=10, **filters):
     return entities, f"{len(entities)} '{dataset}' entities"
 
 
+LR_BASE = "https://landregistry.data.gov.uk/data/ppi/transaction-record.json"
+
+
+def _lr_type(item):
+    """Property type from the record's _about URL (terraced / semi-detached /
+    detached / flat-maisonette / other)."""
+    about = (item.get("propertyType", {}) or {}).get("_about", "")
+    return about.rsplit("/", 1)[-1] if about else ""
+
+
 def land_registry_recent_sales(postcode, limit=20):
-    """Recent Price Paid transactions for a postcode via the Land Registry
-    Linked-Data JSON endpoint. Returns (transactions: list, note)."""
+    """Recent Price Paid transactions for an EXACT postcode. Returns (list, note)."""
     pc = urllib.parse.quote(postcode.upper())
-    url = (
-        "https://landregistry.data.gov.uk/data/ppi/transaction-record.json"
-        f"?propertyAddress.postcode={pc}&_pageSize={limit}&_sort=-transactionDate"
-    )
+    url = f"{LR_BASE}?propertyAddress.postcode={pc}&_pageSize={limit}&_sort=-transactionDate"
     try:
         data = _get(url)
     except Exception as e:
         return [], f"Land Registry request failed ({e}); is egress allowed?"
     items = data.get("result", {}).get("items", [])
-    out = []
-    for it in items:
-        out.append({
-            "price": it.get("pricePaid"),
-            "date": it.get("transactionDate"),
-            "type": (it.get("propertyType", {}) or {}).get("prefLabel"),
-        })
+    out = [{"price": it.get("pricePaid"), "date": it.get("transactionDate"),
+            "type": _lr_type(it), "postcode": (it.get("propertyAddress", {}) or {}).get("postcode")}
+           for it in items]
     return out, f"{len(out)} recent sales for {postcode}"
+
+
+def land_registry_district_records(district, pages=3, page_size=200):
+    """Pull recent Price Paid records for a local-authority district (e.g.
+    'NEWHAM'), most-recent first, across several pages. Returns (records, note).
+    Each record: {price, date, type, postcode}."""
+    out = []
+    for page in range(pages):
+        q = {"propertyAddress.district": district.upper(), "_sort": "-transactionDate",
+             "_pageSize": page_size, "_page": page}
+        try:
+            data = _get(LR_BASE + "?" + urllib.parse.urlencode(q))
+        except Exception as e:
+            return out, f"Land Registry request failed ({e}); is egress allowed?"
+        items = data.get("result", {}).get("items", [])
+        if not items:
+            break
+        for it in items:
+            out.append({"price": it.get("pricePaid"), "date": it.get("transactionDate"),
+                        "type": _lr_type(it),
+                        "postcode": (it.get("propertyAddress", {}) or {}).get("postcode", "") or ""})
+    return out, f"{len(out)} records for {district}"
+
+
+def area_price_medians(records, postcode_prefix):
+    """Median flat / house / all-type prices for records whose postcode starts
+    with `postcode_prefix` (e.g. 'E7', 'SE2'). Returns a dict."""
+    import statistics
+    pref = postcode_prefix.upper()
+    flats, houses, allp = [], [], []
+    latest = None
+    for r in records:
+        if not (r["postcode"] or "").upper().startswith(pref):
+            continue
+        p = r["price"]
+        if not p:
+            continue
+        allp.append(p)
+        if "flat" in r["type"]:
+            flats.append(p)
+        elif r["type"] in ("terraced", "semi-detached", "detached"):
+            houses.append(p)
+        latest = latest or r["date"]
+    med = lambda xs: int(statistics.median(xs)) if xs else None
+    return {"flat_median": med(flats), "house_median": med(houses), "all_median": med(allp),
+            "n_flat": len(flats), "n_house": len(houses), "n_all": len(allp), "latest_date": latest}
 
 
 def print_catalog():
