@@ -81,9 +81,12 @@ Three ways, increasing in power:
 
 ## Updating the data
 
-`data/areas.csv` ships with **curated seed values** from the 2025-26 research
-(see the `notes` column and `methodology.md`). They're illustrative — refresh
-them with live open data via `datasources.py`:
+`data/areas.csv` ships with **live HM Land Registry flat/house price medians**
+(refreshed to ~March 2026 via `python3 scripts/refresh_prices.py`; rows tagged
+`data_confidence=live` with the sample count + date in `notes`). The qualitative
+factors (transport pipeline, regen, gentrification momentum, risk flags) remain
+**curated values** from the 2025-26 research — refresh those via the catalogued
+open data:
 
 - `police_crime_count(lat, lon, "2026-01")` → the `safety` factor (no key)
 - `land_registry_recent_sales("SE2 9XY")` → price inputs (full postcode, no key)

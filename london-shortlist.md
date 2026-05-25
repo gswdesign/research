@@ -31,18 +31,27 @@ exactly the decision you have to make.
 
 ## Ranked output (seed data)
 
-**Balanced** (`growth_tilt=0.5`):
+**Balanced** (`growth_tilt=0.5`). **Flat£ = live HM Land Registry median, to ~March 2026** (refreshed via `scripts/refresh_prices.py`):
 
-| # | Area | Borough | ~Flat£ | Comp | Grow | Live | Risk |
+| # | Area | Borough | Flat£ (live) | Comp | Grow | Live | Risk |
 |---|------|---------|-------:|-----:|-----:|-----:|-----:|
-| 1 | Walthamstow | Waltham Forest | 420k | 67.0 | 49.8 | 84.3 | 0 |
-| 2 | Forest Gate | Newham | 380k | 61.4 | 60.2 | 62.7 | 0 |
-| 3 | Manor Park | Newham | 350k | 59.9 | 60.1 | 59.6 | 0 |
-| 4 | Leyton | Waltham Forest | 400k | 55.3 | 50.1 | 67.1 | 14 |
-| 5 | Abbey Wood | Greenwich/Bexley | 330k | 54.0 | 80.3 | 54.8 | 50 |
-| 6 | Ealing | Ealing | 420k | 48.7 | 22.7 | 84.5 | 23 |
-| 7 | Tottenham Hale | Haringey | 380k | 48.7 | 69.6 | 67.8 | 73 |
-| 8 | Bexleyheath | Bexley | 290k | 47.3 | 29.9 | 64.8 | 0 |
+| 1 | Walthamstow | Waltham Forest | 436k | 67.0 | 49.8 | 84.3 | 0 |
+| 2 | Forest Gate | Newham | 260k | 61.4 | 60.2 | 62.7 | 0 |
+| 3 | Manor Park | Newham | 230k | 59.9 | 60.1 | 59.6 | 0 |
+| 4 | Leyton | Waltham Forest | 418k | 55.3 | 50.1 | 67.1 | 14 |
+| 5 | Abbey Wood | Greenwich/Bexley | 255k | 54.0 | 80.3 | 54.8 | 50 |
+| 6 | Ealing | Ealing | 465k | 48.7 | 22.7 | 84.5 | 23 |
+| 7 | Tottenham Hale | Haringey | 316k | 48.7 | 69.6 | 67.8 | 73 |
+| 8 | Bexleyheath | Bexley | 272k | 47.3 | 29.9 | 64.8 | 0 |
+
+> **Live-data note:** Land Registry flat medians came in *below* the original
+> seed estimates across east/SE London (Forest Gate £260k, Manor Park £230k,
+> Abbey Wood £255k, Barking £235k) — i.e. **the best risk-adjusted areas are
+> even more affordable than headline averages suggest, and sit comfortably under
+> the £450k LISA cap.** Note these are flat medians; house medians are markedly
+> higher (Forest Gate ~£597k, Walthamstow ~£710k, Lewisham ~£773k), so the
+> "houses now above budget" caveat is real. Croydon/Nine Elms kept seed values
+> (too few in-window samples for those postcode prefixes).
 
 **Max-growth** (`growth_tilt=0.8`, risk punished harder): Forest Gate, Manor
 Park, Walthamstow, **Abbey Wood**, Leyton, Dagenham, Barking, Thamesmead rise to
@@ -59,7 +68,7 @@ The cleanest *leading* play on the board. Elizabeth line already open **plus** t
 **DLR-to-Thamesmead extension** — funded in the Nov 2025 Budget (£1.62bn, TWAO
 late-2026, opening early 2030s). Layered on the **Thamesmead Waterfront "New
 Town"** (15,000 homes, Peabody/Lendlease). Cheapest riverside entry in London;
-Abbey Wood flats ~£330k (LISA-safe), Thamesmead lower.
+live LR Abbey Wood flat median ~£255k, Thamesmead ~£256k — both well under the £450k LISA cap.
 - **Top growth sub-scores (80+).** This is buying a funded-but-not-open catalyst —
   the textbook professional trade.
 - **Risk to weigh:** Thames-side **flood**, **new-build flat/cladding** exposure,
@@ -84,9 +93,10 @@ fit. **Leyton** is the cheaper ripple-effect neighbour.
 - **Best for:** home-first buyers prioritising somewhere genuinely nice to live now.
 
 ### 4. The deep-value entry — **Barking & Dagenham**
-London's **cheapest** borough (~£300k flats / £260k Dagenham), **highest yield
-(~6.2%)**, Barking Riverside (10k homes, Overground live since 2022). Dagenham
-houses are about the only sub-£400k houses left in London.
+London's **cheapest** borough (live LR flat medians ~£235k Barking / ~£228k
+Dagenham), **highest yield (~6.2%)**, Barking Riverside (10k homes, Overground
+live since 2022). Dagenham house median ~£380k — about the only sub-£400k houses
+left in London.
 - **Risk to weigh:** ex-LA stigma, slower transport, lighter near-term catalyst.
 - **Best for:** maximum budget headroom, income/yield, or wanting an actual house.
 
