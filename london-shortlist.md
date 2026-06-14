@@ -33,16 +33,24 @@ exactly the decision you have to make.
 
 **Balanced** (`growth_tilt=0.5`). **Flat£ = live HM Land Registry median, to ~March 2026** (refreshed via `scripts/refresh_prices.py`):
 
-| # | Area | Borough | Flat£ (live) | Comp | Grow | Live | Risk |
+| # | Area | Borough | Flat£ | Comp | Grow | Live | Risk |
 |---|------|---------|-------:|-----:|-----:|-----:|-----:|
-| 1 | Walthamstow | Waltham Forest | 436k | 67.0 | 49.8 | 84.3 | 0 |
-| 2 | Forest Gate | Newham | 260k | 61.4 | 60.2 | 62.7 | 0 |
-| 3 | Manor Park | Newham | 230k | 59.9 | 60.1 | 59.6 | 0 |
-| 4 | Leyton | Waltham Forest | 418k | 55.3 | 50.1 | 67.1 | 14 |
-| 5 | Abbey Wood | Greenwich/Bexley | 255k | 54.0 | 80.3 | 54.8 | 50 |
-| 6 | Ealing | Ealing | 465k | 48.7 | 22.7 | 84.5 | 23 |
-| 7 | Tottenham Hale | Haringey | 316k | 48.7 | 69.6 | 67.8 | 73 |
-| 8 | Bexleyheath | Bexley | 272k | 47.3 | 29.9 | 64.8 | 0 |
+| 1 | Walthamstow | Waltham Forest | 436k | 66.7 | 49.8 | 83.7 | 0 |
+| 2 | Forest Gate | Newham | 260k | 61.1 | 60.2 | 62.0 | 0 |
+| 3 | Manor Park | Newham | 230k | 59.6 | 60.1 | 59.0 | 0 |
+| **4** | **Acton** | **Ealing** | **450k** | **56.3** | **66.3** | **65.0** | **36** |
+| **5** | **Bow** | **Tower Hamlets** | **420k** | **55.1** | **57.0** | **71.6** | **36** |
+| 6 | Leyton | Waltham Forest | 418k | 55.0 | 50.1 | 66.5 | 14 |
+| 7 | Abbey Wood | Greenwich/Bexley | 255k | 53.9 | 80.3 | 54.4 | 50 |
+| 8 | Ealing | Ealing | 465k | 48.6 | 22.7 | 84.2 | 23 |
+| 9 | Tottenham Hale | Haringey | 316k | 48.4 | 69.6 | 67.1 | 73 |
+| 10 | Bexleyheath | Bexley | 272k | 47.2 | 29.9 | 64.6 | 0 |
+
+**Acton (#4)** and **Bow (#5)** are the additions for buyers whose commute
+anchors on the **west end of the Central line** (e.g. White City / Television
+Centre). See thesis §5 below. Flat£ is live LR median for areas tagged `live`
+in `data/areas.csv`; Acton and Bow remain on hand-set estimates (`med`
+confidence) — the LR refresh was throttled (HTTP 403) on the most recent run.
 
 > **Live-data note:** Land Registry flat medians came in *below* the original
 > seed estimates across east/SE London (Forest Gate £260k, Manor Park £230k,
@@ -99,6 +107,44 @@ live since 2022). Dagenham house median ~£380k — about the only sub-£400k ho
 left in London.
 - **Risk to weigh:** ex-LA stigma, slower transport, lighter near-term catalyst.
 - **Best for:** maximum budget headroom, income/yield, or wanting an actual house.
+
+### 5. The commute-driven west pick — **Acton / Bow** (added for the W12 + E2 corridor)
+
+For buyers whose journeys anchor on **both ends of the Central line** (e.g. Bethnal
+Green AND White City / Television Centre, W12), the east-leaning regen picks
+above don't fit — Leyton is ~45-55 min peak to W12, which is too much daily. Two
+additions:
+
+- **Acton (W3) — Old Oak Common HS2 super-hub.** East / North Acton is ~8 min on
+  the Central to White City and ~33 min to Bethnal Green — the best split of any
+  area for that commute. The funded catalyst is genuine: **Old Oak Common is
+  the £26bn HS2 + Elizabeth + Overground interchange currently under construction
+  (Europe's largest regen, OPDC ~24,000 homes by 2040)**. Period W3 housing
+  benefits from the catalyst without being part of the new-build absorption.
+  Realistic stock: 2-bed Victorian conversion £420-500k (often share-of-freehold),
+  2-bed terrace £550-650k (stretches budget).
+- **Bow (E3) — gentrification ripple from Hackney.** Mile End on the Central is
+  Bethnal Green's neighbour (1 stop / ~2 min) and ~30-35 min to W12. Period
+  terraces and Victorian conversions. Roman Road regen is real but steady — no
+  single mega-catalyst, just compounded momentum. Cheaper than Acton: 2-bed
+  conversion £400-450k, 2-bed terrace £500-600k.
+
+Pick Acton if you'll pay the small premium for the bigger growth catalyst and
+the better west commute; Bow if you want to anchor your own short BG ride and
+save £50-100k on the same flat type.
+
+### A note on "no leasehold"
+
+A blanket no-leasehold rule is a sensible heuristic but slightly too blunt. The
+real issues are the *bad* lease features: short remaining lease (<100yr),
+ground rent that escalates (e.g. doubling every 20yrs), cladding/EWS1 risk on
+high-rise towers, and opaque/extortionate service charges. A **999-year lease
+with peppercorn ground rent in a low-rise Victorian conversion** is functionally
+similar to share-of-freehold — and post the **2024 Leasehold & Freehold Reform
+Act**, lease extensions and enfranchisement are cheaper, so even short-ish
+leases on otherwise clean buildings are workable. Use the rule to walk away
+from new-build glass towers with escalating ground rent and cladding question
+marks; keep the door open on clean long-lease conversions.
 
 ---
 

@@ -39,7 +39,7 @@ def test_factor_csv_alignment():
 def test_scoring():
     areas = scoring.load_areas(DATA)
     ranked = scoring.score(areas, config.BALANCED)
-    check("all areas loaded", len(ranked) == 20)
+    check("all areas loaded", len(ranked) == 22)
     check("scores in 0..100", all(0 <= a.composite <= 100 for a in ranked))
     check("ranking is sorted desc", all(ranked[i].composite >= ranked[i+1].composite for i in range(len(ranked)-1)))
     # Tilt changes the order: growth-tilt should rank Abbey Wood (huge growth) higher than under liveability tilt.

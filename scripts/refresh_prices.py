@@ -45,7 +45,9 @@ AREA_MAP = {
     "Canada Water": ("SOUTHWARK", "SE16"),
     "Old Kent Road": ("SOUTHWARK", "SE15"),
     "Ealing": ("EALING", "W5"),
+    "Acton": ("EALING", "W3"),
     "Nine Elms": ("WANDSWORTH", "SW8"),
+    "Bow": ("TOWER HAMLETS", "E3"),
 }
 
 
